@@ -35,6 +35,32 @@ local function Check24SoltSpell(SoltId)
 	end
 end
 
+local SPELL_CACHE = {};
+
+local funtion GetSpellIndex(expect, bookType)
+	bookType = bookType or BOOKTYPE_SPELL;
+
+	if(SPELL_CACHE[bookType] == nil) then
+		SPELL_CACHE[bookType] = {};
+
+		local slot, name, rank, fullname = 0;
+
+        repeat
+            slot = slot + 1;
+			name, rank = GetSpellName(slot, bookType);
+
+            if(name ~= nil) then
+				fullname = (rank == nil or rank == "") and name or name .. "(" .. rank .. ")";
+
+                SPELL_CACHE[bookType][name] = slot;
+                SPELL_CACHE[bookType][fullname] = slot;
+            end
+        until(name == nil)
+	end
+
+	return SPELL_CACHE[bookType][expect];
+end
+
 function StartAttack(SoltId)
 	if not SoltId then SoltId = 24 end
 	local noattacktexture = Check24SoltSpell(SoltId)
