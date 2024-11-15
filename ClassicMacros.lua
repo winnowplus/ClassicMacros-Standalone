@@ -37,7 +37,7 @@ end
 
 local SPELL_CACHE = {};
 
-local funtion GetSpellIndex(expect, bookType)
+local function GetSpellIndex(expect, bookType)
 	bookType = bookType or BOOKTYPE_SPELL;
 
 	if(SPELL_CACHE[bookType] == nil) then
