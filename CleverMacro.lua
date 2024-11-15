@@ -2,6 +2,10 @@
 -- CleverMacro v1.3.1 by _brain    VERSION = 1.7                              --
 --------------------------------------------------------------------------------
 
+if(_G == nil) then
+    _G = getfenv()
+end
+
 local lastUpdate = 0    
 local currentAction
 local mouseOverUnit
